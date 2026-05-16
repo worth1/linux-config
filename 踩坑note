@@ -1,0 +1,25 @@
+### 1. sudo: command not found
+问题：新安装的最小化系统，部分命令需要装包才会有。
+解决：
+bash
+运行
+# 以 netstat 为例
+apt install net-tools -y
+yum install net-tools -y
+  
+### 2. SSH 连接被拒绝 / Connection refused
+排查步骤：
+检查服务器是否开启 SSH 服务：systemctl status sshd
+检查防火墙 / 安全组是否放行 22 端口
+确认 sshd_config 里 PermitRootLogin 不是 no
+
+### 3. rm -rf /* 误操作
+问题：误删根目录，系统直接崩溃。
+教训：
+永远不要用 rm -rf /
+批量删除前，先用 echo rm -rf 目标 看一眼路径对不对
+重要数据一定要备份！
+### 4. 重点记忆
+改完 /etc/profile 记得 source /etc/profile 生效
+生产环境尽量用 tmux 跑后台任务，防止断网丢失进程
+tail -f logfile.log 看实时日志，排查问题神器
